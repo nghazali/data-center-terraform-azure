@@ -1,5 +1,5 @@
 locals {
-  storage_account_name     = "azure-nfs-storage-${var.product}"
+  storage_account_name     = "aznfsst${var.product}"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
