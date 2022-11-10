@@ -1,52 +1,40 @@
-
-resource "azurerm_managed_disk" "shared_home" {
-  name                 = "acctestmd"
-  location             = var.region
-  resource_group_name  = var.resource_group_name
-  storage_account_type = local.azure_storage_class # e.g. "Standard_LRS"
-  create_option        = "Empty"
-  disk_size_gb         = tonumber(regex("\\d+", var.shared_home_size)) # "1"
-
-  tags = {
-    Name = "${var.product}-nfs-shared-home"
-  }
-}
-
-resource "kubernetes_persistent_volume" "nfs_shared_home" {
-  metadata {
-    name = "${local.nfs_name}-pv"
-  }
-  spec {
-    access_modes = ["ReadWriteOnce"]
-    capacity = {
-      storage = var.shared_home_size
-    }
-    storage_class_name = local.storage_class
-    persistent_volume_source {
-      aws_elastic_block_store {
-        volume_id = azurerm_managed_disk.shared_home.id
-      }
-    }
-    claim_ref {
-      name      = "${local.nfs_name}-pvc"
-      namespace = var.namespace
-    }
-  }
-}
-
-resource "kubernetes_persistent_volume_claim" "nfs_shared_home" {
-  metadata {
-    name      = "${local.nfs_name}-pvc"
-    namespace = var.namespace
-  }
-  spec {
-    access_modes = ["ReadWriteOnce"]
-    resources {
-      requests = {
-        storage = var.shared_home_size
-      }
-    }
-    storage_class_name = local.storage_class
-    volume_name        = kubernetes_persistent_volume.nfs_shared_home.metadata.0.name
-  }
-}
+#resource "kubernetes_persistent_volume" "product_shared_home_pv" {
+#  metadata {
+#    name = "${var.product}-shared-home-pv"
+#  }
+#  spec {
+#    capacity = {
+#      storage = var.shared_home_size
+#    }
+#    volume_mode        = "Filesystem"
+#    access_modes       = ["ReadWriteMany"]
+#    storage_class_name = local.storage_class
+#    mount_options      = ["rw", "lookupcache=pos", "noatime", "intr", "_netdev", "nfsvers=3", "rsize=32768", "wsize=32768"]
+#
+#    persistent_volume_source {
+#      azure_disk {
+#        caching_mode  = "None"
+#        data_disk_uri = azurerm_storage_share.nfs.id
+#        disk_name     = "shared-nfs-home"
+#        kind          = "Managed"
+#      }
+#    }
+#  }
+#}
+#
+#resource "kubernetes_persistent_volume_claim" "product_shared_home_pvc" {
+#  metadata {
+#    name      = "${var.product}-shared-home-pvc"
+#    namespace = var.namespace
+#  }
+#  spec {
+#    access_modes = ["ReadWriteMany"]
+#    resources {
+#      requests = {
+#        storage = var.shared_home_size
+#      }
+#    }
+#    volume_name        = kubernetes_persistent_volume.product_shared_home_pv.metadata[0].name
+#    storage_class_name = local.storage_class
+#  }
+#}

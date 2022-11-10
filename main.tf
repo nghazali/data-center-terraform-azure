@@ -62,8 +62,7 @@ module "storage" {
   region               = azurerm_resource_group.vnet-rg.location
   namespace            = local.namespace
   product              = local.product
-  shared_home_size     = var.shared_home_size
-
+#  shared_home_size     = var.shared_home_size
 }
 
 variable "shared_home_size" {

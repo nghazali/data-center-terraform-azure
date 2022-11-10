@@ -29,3 +29,7 @@ output "RDS" {
     rds_jdbc_connection             = module.rds.rds_jdbc_connection
   }
 }
+
+output "nfs-claim" {
+  value = module.storage.nfs_claim_name
+}
