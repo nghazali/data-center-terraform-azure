@@ -197,3 +197,9 @@ variable "shared_home_snapshot_id" {
   type        = string
   default     = null
 }
+
+variable "shared_home_pvc" {
+  description = "Shared home persistent volume claim."
+  type        = string
+  default     = null
+}

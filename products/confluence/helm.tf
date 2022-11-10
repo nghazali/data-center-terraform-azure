@@ -2,7 +2,7 @@
 # Confluence DC helm installation
 ################################################################################
 resource "helm_release" "confluence" {
-  depends_on = [kubernetes_job.pre_install]
+#  depends_on = [kubernetes_job.pre_install]
   name       = local.product_name
   namespace  = var.namespace
   repository = local.helm_chart_repository
@@ -70,7 +70,7 @@ resource "helm_release" "confluence" {
         sharedHome = {
           customVolume = {
             persistentVolumeClaim = {
-              claimName = module.nfs.nfs_claim_name
+              claimName = var.shared_home_pvc
             }
           }
         }

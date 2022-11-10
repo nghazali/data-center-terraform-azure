@@ -8,6 +8,11 @@ locals {
   username = "my-admin"
   password = "Password!1234abcd"
   product  = "confluence"
+
+  install_confluence = 1
+
+  local_confluence_chart_path = var.local_helm_charts_path != "" && var.confluence_install_local_chart ? "${var.local_helm_charts_path}/confluence" : ""
+
 }
 
 
