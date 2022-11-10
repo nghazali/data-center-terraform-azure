@@ -23,3 +23,7 @@ output "subnet_id" {
 output "vpc_id" {
   value = azurerm_virtual_network.vpc.id
 }
+
+output "aks_subnet_id" {
+  value = azurerm_subnet.aks-subnet.id
+}

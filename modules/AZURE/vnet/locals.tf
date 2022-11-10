@@ -4,4 +4,5 @@ locals {
   gateway-subnet = local.subnets[0][0]
   mgmt-subnet    = local.subnets[0][1]
   rds-subnet     = local.subnets[1][0]
+  aks-subnet     = local.subnets[1][1]
 }
