@@ -39,19 +39,31 @@ module "rds" {
   instance_class       = "B_Standard_B1ms"
 }
 
-module "nfs" {
-  source     = "./modules/AZURE/nfs"
+#module "nfs" {
+#  source     = "./modules/AZURE/nfs"
+#  depends_on = [kubernetes_namespace.products]
+#
+#  resource_group_name  = azurerm_resource_group.vnet-rg.name
+#  region               = azurerm_resource_group.vnet-rg.location
+#  namespace            = local.namespace
+#  product              = local.product
+#  requests_cpu         = "1"
+#  requests_memory      = "500m"
+#  availability_zone    = "1"
+#  shared_home_size     = var.shared_home_size
+#  cluster_service_ipv4 = "10.0.4.4"
+#}
+
+module "storage" {
+  source     = "./modules/AZURE/storage"
   depends_on = [kubernetes_namespace.products]
 
   resource_group_name  = azurerm_resource_group.vnet-rg.name
   region               = azurerm_resource_group.vnet-rg.location
   namespace            = local.namespace
   product              = local.product
-  requests_cpu         = "1"
-  requests_memory      = "500m"
-  availability_zone    = "1"
   shared_home_size     = var.shared_home_size
-  cluster_service_ipv4 = "10.0.4.4"
+
 }
 
 variable "shared_home_size" {
