@@ -6,7 +6,7 @@ module "aks" {
   region              = azurerm_resource_group.vnet-rg.location
   cluster_name        = local.cluster_name
   agent_count         = 1
-  instance_type       = "Standard_D2_v2"
+  instance_type       = local.azure_vmsize
   ssh_public_key      = var.ssh_public_key
 }
 

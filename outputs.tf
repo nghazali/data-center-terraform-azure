@@ -2,21 +2,21 @@ output "vpc-detail" {
   description = "VPC network detail"
 
   value = {
-    id = module.vpc.vnet.id
+    id                 = module.vpc.vnet.id
     public_subnet_cidr = module.vpc.vnet.subnet
   }
 }
 
 output "vpc" {
   description = "VPC network information"
-  value = module.vpc.vnet
+  value       = module.vpc.vnet
 }
 
 output "AKS" {
   description = "Azure Kubernetes information"
   value = {
     client_certificate = module.aks.cluster_id
-    kube_config = module.aks.kube_config
+    kube_config        = module.aks.kube_config
   }
   sensitive = true
 }
@@ -29,7 +29,3 @@ output "RDS" {
     rds_jdbc_connection             = module.rds.rds_jdbc_connection
   }
 }
-
-#output "AKS endpoint" {
-#  value = module.aks.endpoint
-#}
