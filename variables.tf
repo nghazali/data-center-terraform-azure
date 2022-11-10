@@ -23,7 +23,6 @@ variable "environment_name" {
   }
 }
 
-
 variable "region" {
   description = "Name of the AWS region."
   type        = string
