@@ -23,10 +23,12 @@ output "AKS" {
 
 output "RDS" {
   description = "Database information"
-  value       = {
-    azurerm_postgresql_server       = module.rds.azurerm_postgresql_flexible_server
-    postgresql_server_database_name = module.rds.postgresql_flexible_server_database_name
-    rds_jdbc_connection             = module.rds.rds_jdbc_connection
+  value = {
+    instance_name       = module.rds.rds_instance_name
+    database_name       = module.rds.rds_db_name
+    rds_jdbc_connection = module.rds.rds_jdbc_connection
+    endpoint            = module.rds.rds_endpoint
+    rds_connection      = module.rds.rds_connection
   }
 }
 
