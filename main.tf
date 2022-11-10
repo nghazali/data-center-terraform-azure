@@ -1,13 +1,15 @@
 
 module "aks" {
   source = "./modules/AZURE/aks"
+  depends_on = [module.vpc]
 
   resource_group_name = azurerm_resource_group.vnet-rg.name
   region              = azurerm_resource_group.vnet-rg.location
   cluster_name        = local.cluster_name
   agent_count         = 1
-  instance_type       = local.azure_vmsize
+  instance_type       = local.azure_sku_vm
   ssh_public_key      = var.ssh_public_key
+  subnet_id           = module.vpc.aks_subnet_id
 }
 
 module "vpc" {

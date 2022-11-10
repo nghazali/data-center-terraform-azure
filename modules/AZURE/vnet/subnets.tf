@@ -61,3 +61,11 @@ resource "azurerm_subnet" "rds" {
     }
   }
 }
+
+
+resource "azurerm_subnet" "aks-subnet" {
+  name                 = "aks-default-subnet"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vpc.name
+  address_prefixes     = [local.aks-subnet]
+}
