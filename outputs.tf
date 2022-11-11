@@ -36,10 +36,13 @@ output "nfs-claim" {
   value = module.storage.nfs_claim_name
 }
 
-output "confluence" {
-  description = "Confluence information"
-  value = {
-    confluence_url = module.confluence.product_domain_name
-    synchrony_url  = module.confluence.synchrony_url
-  }
+output nginx {
+  value = module.ingress.outputs
 }
+#output "confluence" {
+#  description = "Confluence information"
+#  value = {
+#    confluence_url = local.install_confluence && length(module.confluence) == 1 ? module.confluence[0].product_domain_name : null
+#    synchrony_url  = var.confluence_collaborative_editing_enabled && length(module.confluence) == 1 ? module.confluence[0].synchrony_url : null
+#  }
+#}

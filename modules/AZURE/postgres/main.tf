@@ -38,6 +38,7 @@ resource "azurerm_network_security_group" "rds" {
 
 
 resource "azurerm_subnet_network_security_group_association" "rds-nsg-association" {
+  depends_on = [azurerm_network_security_group.rds]
   subnet_id                 = var.subnet_id
   network_security_group_id = azurerm_network_security_group.rds.id
 }
