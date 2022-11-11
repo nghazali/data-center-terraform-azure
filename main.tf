@@ -65,6 +65,17 @@ module "storage" {
 #  shared_home_size     = var.shared_home_size
 }
 
+module "ingress" {
+  source     = "./modules/AZURE/ingress"
+  depends_on = [module.aks]
+
+  # inputs
+  ingress_domain              = null
+  enable_ssh_tcp              = true
+  load_balancer_access_ranges =  var.whitelist_cidr
+  enable_https_ingress        = true
+}
+
 variable "shared_home_size" {
   description = "The storage capacity to allocate to shared home"
   type        = string

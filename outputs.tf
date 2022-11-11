@@ -28,10 +28,18 @@ output "RDS" {
     database_name       = module.rds.rds_db_name
     rds_jdbc_connection = module.rds.rds_jdbc_connection
     endpoint            = module.rds.rds_endpoint
-    rds_connection      = module.rds.rds_connection
+#    rds_connection      = module.rds.rds_connection
   }
 }
 
 output "nfs-claim" {
   value = module.storage.nfs_claim_name
+}
+
+output "confluence" {
+  description = "Confluence information"
+  value = {
+    confluence_url = module.confluence.product_domain_name
+    synchrony_url  = module.confluence.synchrony_url
+  }
 }
