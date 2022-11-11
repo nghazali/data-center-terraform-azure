@@ -35,3 +35,11 @@ output "RDS" {
 output "nfs-claim" {
   value = module.storage.nfs_claim_name
 }
+
+output "confluence" {
+  description = "Confluence information"
+  value = {
+    confluence_url = module.confluence.product_domain_name
+    synchrony_url  = module.confluence.synchrony_url
+  }
+}
