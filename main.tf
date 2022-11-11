@@ -72,7 +72,7 @@ module "ingress" {
   # inputs
   ingress_domain              = null
   enable_ssh_tcp              = true
-  load_balancer_access_ranges =  ["0.0.0.0/0"]
+  load_balancer_access_ranges =  var.whitelist_cidr
   enable_https_ingress        = true
 }
 

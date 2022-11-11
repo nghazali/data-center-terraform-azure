@@ -57,7 +57,7 @@ module "confluence" {
 
   # If local Helm charts path is provided, Terraform will then install using local charts and ignores remote registry
   local_confluence_chart_path = local.local_confluence_chart_path
-  
+
   resource_group_name = azurerm_resource_group.vnet-rg.name
   region              = azurerm_resource_group.vnet-rg.location
 }

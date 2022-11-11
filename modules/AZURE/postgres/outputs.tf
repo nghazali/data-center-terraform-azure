@@ -21,13 +21,12 @@ output "rds_master_username" {
 
 output "rds_master_password" {
   value     = azurerm_postgresql_flexible_server.instance.administrator_password
-  sensitive = true
 }
 
 output "rds_endpoint" {
-  value = azurerm_postgresql_flexible_server.instance.connection
+  value = "${local.instance_name}.postgres.database.azure.com:5432"
 }
-
-output "rds_connection" {
-  value = azurerm_postgresql_flexible_server_database.db..db_jdbc_connection
-}
+#
+#output "rds_connection" {
+#  value = azurerm_postgresql_flexible_server_database.db.connection
+#}

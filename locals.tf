@@ -9,7 +9,7 @@ locals {
   password = "Password!1234abcd"
   product  = "confluence"
 
-  install_confluence = 1
+  install_confluence = true
 
   local_confluence_chart_path = var.local_helm_charts_path != "" && var.confluence_install_local_chart ? "${var.local_helm_charts_path}/confluence" : ""
 

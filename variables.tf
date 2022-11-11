@@ -56,6 +56,16 @@ variable "local_helm_charts_path" {
   }
 }
 
+variable "whitelist_cidr" {
+  description = "List of CIDRs allowed accessing the application(s)."
+  default     = ["0.0.0.0/0"]
+  type        = list(string)
+  validation {
+    condition = alltrue([
+    for o in var.whitelist_cidr : can(regex("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])/([0-9]|1[0-9]|2[0-9]|3[0-2])$", o))])
+    error_message = "Invalid whitelist CIDR. Valid format is a list of '<IPv4>/[0-32]' e.g: [\"10.0.0.0/18\"]."
+  }
+}
 
 ################################################################################
 # Confluence variables
@@ -195,14 +205,14 @@ variable "confluence_db_major_engine_version" {
 }
 
 variable "confluence_db_allocated_storage" {
-  description = "Allocated storage for database instance in GiB."
-  default     = 1000
+  description = "Allocated storage for database instance in mb."
+  default     = 32768
   type        = number
 }
 
 variable "confluence_db_instance_class" {
   description = "Instance class of the RDS instance."
-  default     = "db.t3.micro"
+  default     = "B_Standard_B1ms"
   type        = string
 }
 
